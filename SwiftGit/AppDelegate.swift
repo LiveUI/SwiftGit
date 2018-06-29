@@ -33,6 +33,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // MARK: Actions
     
+    @objc func commit(_ sender: NSMenuItem) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let windowController = storyboard.instantiateController(withIdentifier: "Commit Window Controller") as! NSWindowController
+        if let commitWindow = windowController.window {
+            let controller = commitWindow.contentViewController as! CommitViewController
+            controller.project = sender.project
+            controller.cancel = {
+                windowController.close()
+            }
+            controller.stageAll = {
+                print("Stage all yo!")
+            }
+            controller.commit = { commitMessage in
+                print(commitMessage)
+            }
+            
+            NSApplication.shared.runModal(for: commitWindow)
+            commitWindow.close()
+        }
+    }
+    
     @objc func fetch(_ sender: NSMenuItem) {
         guard let repo = sender.project.repo else {
             return

@@ -28,7 +28,7 @@ extension Array where Element: Project {
                     hasChanges = statuses.count > 0
                     
                     if hasChanges {
-                        var item = NSMenuItem(title: "Commit all changes ...", action: nil, keyEquivalent: "")
+                        var item = NSMenuItem(title: "Commit all changes ...", action: #selector(AppDelegate.commit(_:)), keyEquivalent: "")
                         item.target = NSApplication.shared.delegate
                         item.representedObject = project
                         submenu?.addItem(item)
@@ -52,7 +52,6 @@ extension Array where Element: Project {
                             changeItem.representedObject = info
                             changes.addItem(changeItem)
                         }
-                        
                         
                         item.submenu = changes
                         

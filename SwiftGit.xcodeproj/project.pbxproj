@@ -22,6 +22,9 @@
 		150E39B520E58F7200169638 /* SwiftGit2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 150E39B320E58F7200169638 /* SwiftGit2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		150E39B720E6273C00169638 /* GitStatus+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39B620E6273C00169638 /* GitStatus+Helpers.swift */; };
 		150E39B920E63BE100169638 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39B820E63BE100169638 /* FileInfo.swift */; };
+		150E39BC20E6499500169638 /* CommitWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39BB20E6499500169638 /* CommitWindowController.swift */; };
+		150E39BE20E654DD00169638 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 150E39BD20E654DD00169638 /* Main.storyboard */; };
+		150E39C020E655A500169638 /* CommitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39BF20E655A500169638 /* CommitViewController.swift */; };
 		ECA602671E829424000F40FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA602661E829424000F40FD /* AppDelegate.swift */; };
 		ECA602691E829424000F40FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA602681E829424000F40FD /* Assets.xcassets */; };
 		ECA6026C1E829424000F40FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA6026A1E829424000F40FD /* MainMenu.xib */; };
@@ -57,6 +60,9 @@
 		150E39B320E58F7200169638 /* SwiftGit2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftGit2.framework; path = ../Carthage/Build/Mac/SwiftGit2.framework; sourceTree = "<group>"; };
 		150E39B620E6273C00169638 /* GitStatus+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GitStatus+Helpers.swift"; sourceTree = "<group>"; };
 		150E39B820E63BE100169638 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		150E39BB20E6499500169638 /* CommitWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitWindowController.swift; sourceTree = "<group>"; };
+		150E39BD20E654DD00169638 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		150E39BF20E655A500169638 /* CommitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitViewController.swift; sourceTree = "<group>"; };
 		152BAC661E8519FD00A0F78D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		152BAC671E8519FD00A0F78D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ECA602631E829424000F40FD /* SwiftGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +100,7 @@
 		150E399320E5827300169638 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				150E39BD20E654DD00169638 /* Main.storyboard */,
 				ECA602681E829424000F40FD /* Assets.xcassets */,
 				ECA6026A1E829424000F40FD /* MainMenu.xib */,
 				ECA6026D1E829424000F40FD /* Info.plist */,
@@ -134,6 +141,15 @@
 			path = Libs;
 			sourceTree = "<group>";
 		};
+		150E39BA20E6497700169638 /* Commit */ = {
+			isa = PBXGroup;
+			children = (
+				150E39BB20E6499500169638 /* CommitWindowController.swift */,
+				150E39BF20E655A500169638 /* CommitViewController.swift */,
+			);
+			path = Commit;
+			sourceTree = "<group>";
+		};
 		ECA6025A1E829424000F40FD = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +170,7 @@
 		ECA602651E829424000F40FD /* SwiftGit */ = {
 			isa = PBXGroup;
 			children = (
+				150E39BA20E6497700169638 /* Commit */,
 				150E399520E5828500169638 /* Extensions */,
 				150E399620E5829100169638 /* Libs */,
 				ECA602661E829424000F40FD /* AppDelegate.swift */,
@@ -226,6 +243,7 @@
 				150E399220E5827000169638 /* Cartfile in Resources */,
 				ECA602691E829424000F40FD /* Assets.xcassets in Resources */,
 				ECA6026C1E829424000F40FD /* MainMenu.xib in Resources */,
+				150E39BE20E654DD00169638 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,11 +257,13 @@
 				150E39B720E6273C00169638 /* GitStatus+Helpers.swift in Sources */,
 				150E39A120E5865400169638 /* NSMenuItem+Helpers.swift in Sources */,
 				150E399920E583D400169638 /* SwiftGit.xcdatamodeld in Sources */,
+				150E39BC20E6499500169638 /* CommitWindowController.swift in Sources */,
 				150E399F20E584B900169638 /* NSMenu+Helpers.swift in Sources */,
 				150E399D20E5844000169638 /* Projects+MenuItems.swift in Sources */,
 				ECA602671E829424000F40FD /* AppDelegate.swift in Sources */,
 				150E39AC20E588EB00169638 /* Project+Helpers.swift in Sources */,
 				ECF0FFD21E82DD1B00C89C88 /* URL+Tools.swift in Sources */,
+				150E39C020E655A500169638 /* CommitViewController.swift in Sources */,
 				150E399B20E5842900169638 /* Projects.swift in Sources */,
 				150E39B920E63BE100169638 /* FileInfo.swift in Sources */,
 			);

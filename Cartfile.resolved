@@ -1,3 +1,5 @@
+github "LiveUI/Hagrid" "1.0.4"
 github "LiveUI/Reloaded" "1.0.1"
+github "SnapKit/SnapKit" "4.0.0"
 github "SwiftGit2/SwiftGit2" "411109760460fcd35b63100231d4b478eb414cc7"
 github "antitypical/Result" "3.2.4"
