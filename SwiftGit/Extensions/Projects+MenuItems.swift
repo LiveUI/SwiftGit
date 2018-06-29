@@ -42,7 +42,6 @@ extension Array where Element: Project {
             if let repo = repo {
                 removeProjectTitle = "Remove project"
                 if let statuses = repo.status().value {
-                    //print(status)
                     hasChanges = statuses.count > 0
                     
                     if hasChanges {
@@ -55,10 +54,7 @@ extension Array where Element: Project {
                         
                         let changes = NSMenu()
                         
-//                        let allFiles = FileManager.default.contents(atPath: project.path!)
-                        
                         for change in statuses {
-                            print(change)
                             let path = change.filePath
                             let info = FileInfo.init(project: project, path: path)
                             let changeItem = NSMenuItem(title: change.title, action: #selector(AppDelegate.revealInFinder(_:)), keyEquivalent: "")
@@ -68,7 +64,6 @@ extension Array where Element: Project {
                         }
                         
                         item.submenu = changes
-                        
                         submenu.addItem(item)
                         
                         submenu.addItem(.separator())
@@ -77,17 +72,24 @@ extension Array where Element: Project {
                 
                 submenu.addItem(.separator())
                 
-                var item = NSMenuItem(title: "Fetch", action: #selector(AppDelegate.fetch(_:)), keyEquivalent: "")
+                var item = NSMenuItem(title: "Open folder ...", action: #selector(AppDelegate.open(_:)), keyEquivalent: "")
                 item.target = NSApplication.shared.delegate
                 item.representedObject = project
                 submenu.addItem(item)
                 
-                item = NSMenuItem(title: "Pull", action: #selector(AppDelegate.push(_:)), keyEquivalent: "")
+                submenu.addItem(.separator())
+                
+                item = NSMenuItem(title: "Fetch", action: #selector(AppDelegate.fetch(_:)), keyEquivalent: "")
                 item.target = NSApplication.shared.delegate
                 item.representedObject = project
                 submenu.addItem(item)
                 
-                item = NSMenuItem(title: "Push", action: #selector(AppDelegate.pull(_:)), keyEquivalent: "")
+                item = NSMenuItem(title: "Pull", action: #selector(AppDelegate.pull(_:)), keyEquivalent: "")
+                item.target = NSApplication.shared.delegate
+                item.representedObject = project
+                submenu.addItem(item)
+                
+                item = NSMenuItem(title: "Push", action: #selector(AppDelegate.push(_:)), keyEquivalent: "")
                 item.target = NSApplication.shared.delegate
                 item.representedObject = project
                 submenu.addItem(item)

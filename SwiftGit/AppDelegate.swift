@@ -9,6 +9,8 @@
 import Cocoa
 import AppKit
 import Reloaded
+import SwiftShell
+import SwiftGit2
 
 
 @NSApplicationMain
@@ -29,70 +31,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusItem?.image?.isTemplate = true
         self.statusItem?.image?.size = CGSize(width: 16, height: 16)
         self.statusItem?.action = #selector(didTapStatusBarIcon)
-    }
-    
-    // MARK: Actions
-    
-    @objc func commit(_ sender: NSMenuItem) {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let windowController = storyboard.instantiateController(withIdentifier: "Commit Window Controller") as! NSWindowController
-        if let commitWindow = windowController.window {
-            let controller = commitWindow.contentViewController as! CommitViewController
-            controller.project = sender.project
-            controller.cancel = {
-                windowController.close()
-            }
-            controller.stageAll = {
-                print("Stage all yo!")
-            }
-            controller.commit = { commitMessage in
-                print(commitMessage)
-            }
-            
-            NSApplication.shared.runModal(for: commitWindow)
-            commitWindow.close()
-        }
-    }
-    
-    @objc func fetch(_ sender: NSMenuItem) {
-        guard let repo = sender.project.repo else {
-            return
-        }
-        
-        // TODO: Fetch only selected remote!
-        for remote in repo.allRemotes().value ?? [] {
-            // TODO: Show results in console!!!
-            _ = repo.fetch(remote)
-        }
-    }
-    
-    @objc func push(_ sender: NSMenuItem) {
-//        guard let repo = sender.project.repo else {
-//            return
-//        }
-//        for remote in repo.allRemotes().value ?? [] {
-//
-//        }
-    }
-    
-    @objc func pull(_ sender: NSMenuItem) {
-//        guard let repo = sender.project.repo else {
-//            return
-//        }
-//
-//        fetch(sender)
-//        // TODO: Checkout latest commit
-    }
-    
-    @objc func revealInFinder(_ sender: NSMenuItem) {
-        guard let info = sender.representedObject as? FileInfo else {
-            return
-        }
-        NSWorkspace.shared.selectFile(info.fullPath, inFileViewerRootedAtPath: info.fullPath)
-    }
-    
-    @objc func removeProject(_ sender: NSMenuItem) {
-        Projects.remove(sender.project)
     }
     
     let subsAsCatsKey = "SubsAsCats"
@@ -155,7 +93,80 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusItem?.popUpMenu(menu)
     }
     
-    // MARK: Working with derived data
+    // MARK: Actions
+    
+    @objc func commit(_ sender: NSMenuItem) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let windowController = storyboard.instantiateController(withIdentifier: "Commit Window Controller") as! NSWindowController
+        if let commitWindow = windowController.window {
+            let controller = commitWindow.contentViewController as! CommitViewController
+            controller.project = sender.project
+            controller.cancel = {
+                windowController.close()
+            }
+            controller.stageAll = {
+                guard let path = sender.project.path else { return }
+                var context = CustomContext()
+                context.currentdirectory = path
+                try? context.runAndPrint("git", "add", ".", "-A")
+            }
+            controller.commit = { commitMessage in
+                sender.project.repo?.commit(message: commitMessage, signature: Signature(name: "", email: <#T##String#>))
+            }
+            
+            NSApplication.shared.runModal(for: commitWindow)
+            commitWindow.close()
+        }
+    }
+    
+    @objc func open(_ sender: NSMenuItem) {
+        guard let path = sender.project.path else {
+            return
+        }
+        NSWorkspace.shared.selectFile(path, inFileViewerRootedAtPath: path)
+    }
+    
+    @objc func fetch(_ sender: NSMenuItem) {
+        guard let path = sender.project.path else {
+            return
+        }
+        
+        // TODO: Refactor all these custom context stuff!!!!
+        var context = CustomContext()
+        context.currentdirectory = path
+        try? context.runAndPrint("git", "push")
+    }
+    
+    @objc func push(_ sender: NSMenuItem) {
+        guard let path = sender.project.path else {
+            return
+        }
+        
+        var context = CustomContext()
+        context.currentdirectory = path
+        try? context.runAndPrint("git", "push")
+    }
+    
+    @objc func pull(_ sender: NSMenuItem) {
+        guard let path = sender.project.path else {
+            return
+        }
+        
+        var context = CustomContext()
+        context.currentdirectory = path
+        try? context.runAndPrint("git", "pull")
+    }
+    
+    @objc func revealInFinder(_ sender: NSMenuItem) {
+        guard let info = sender.representedObject as? FileInfo else {
+            return
+        }
+        NSWorkspace.shared.selectFile(info.fullPath, inFileViewerRootedAtPath: info.fullPath)
+    }
+    
+    @objc func removeProject(_ sender: NSMenuItem) {
+        Projects.remove(sender.project)
+    }
     
     @objc func removeAllProjects(_ sender: NSMenuItem) {
         let alert = NSAlert()

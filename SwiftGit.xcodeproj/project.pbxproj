@@ -27,6 +27,8 @@
 		150E39C020E655A500169638 /* CommitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39BF20E655A500169638 /* CommitViewController.swift */; };
 		150E39C220E6630400169638 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 150E39C120E6630400169638 /* Cartfile.resolved */; };
 		150E39C420E66A7B00169638 /* GitStatusEntry+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 150E39C320E66A7B00169638 /* GitStatusEntry+Helpers.swift */; };
+		150E39C720E685BD00169638 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 150E39C520E685AA00169638 /* SwiftShell.framework */; };
+		150E39C820E685BD00169638 /* SwiftShell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 150E39C520E685AA00169638 /* SwiftShell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ECA602671E829424000F40FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA602661E829424000F40FD /* AppDelegate.swift */; };
 		ECA602691E829424000F40FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECA602681E829424000F40FD /* Assets.xcassets */; };
 		ECA6026C1E829424000F40FD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = ECA6026A1E829424000F40FD /* MainMenu.xib */; };
@@ -41,6 +43,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				150E39B220E5893800169638 /* Reloaded.framework in Embed Frameworks */,
+				150E39C820E685BD00169638 /* SwiftShell.framework in Embed Frameworks */,
 				150E39B520E58F7200169638 /* SwiftGit2.framework in Embed Frameworks */,
 				150E39B020E5893800169638 /* Result.framework in Embed Frameworks */,
 			);
@@ -67,6 +70,7 @@
 		150E39BF20E655A500169638 /* CommitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitViewController.swift; sourceTree = "<group>"; };
 		150E39C120E6630400169638 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
 		150E39C320E66A7B00169638 /* GitStatusEntry+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GitStatusEntry+Helpers.swift"; sourceTree = "<group>"; };
+		150E39C520E685AA00169638 /* SwiftShell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftShell.framework; path = Carthage/Build/Mac/SwiftShell.framework; sourceTree = SOURCE_ROOT; };
 		152BAC661E8519FD00A0F78D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		152BAC671E8519FD00A0F78D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ECA602631E829424000F40FD /* SwiftGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +89,7 @@
 				150E39B120E5893800169638 /* Reloaded.framework in Frameworks */,
 				150E39B420E58F7200169638 /* SwiftGit2.framework in Frameworks */,
 				150E39AF20E5893800169638 /* Result.framework in Frameworks */,
+				150E39C720E685BD00169638 /* SwiftShell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +122,7 @@
 		150E399420E5827B00169638 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				150E39C520E685AA00169638 /* SwiftShell.framework */,
 				150E39B320E58F7200169638 /* SwiftGit2.framework */,
 				150E39AE20E5893800169638 /* Reloaded.framework */,
 				150E39AD20E5893800169638 /* Result.framework */,
@@ -408,6 +414,7 @@
 				);
 				INFOPLIST_FILE = "SwiftGit/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = io.liveui.swiftgit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -425,6 +432,7 @@
 				);
 				INFOPLIST_FILE = "SwiftGit/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = io.liveui.swiftgit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

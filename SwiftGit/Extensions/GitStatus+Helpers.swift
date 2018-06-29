@@ -68,7 +68,6 @@ extension SwiftGit2.Diff.Status {
         case self.rawValue == Diff.Status.ignored.rawValue:
             return "[Ignored]"
         default:
-            print(self)
             return "[?]"
         }
     }

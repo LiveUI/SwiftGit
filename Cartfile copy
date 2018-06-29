@@ -1,0 +1,4 @@
+github "SwiftGit2/SwiftGit2" "master"
+github "LiveUI/Reloaded"
+github "LiveUI/Hagrid"
+github "kareman/SwiftShell"
