@@ -143,7 +143,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Add new project
-        item = NSMenuItem(title: "Add project ...", action: #selector(addProject(_:)), keyEquivalent: "a")
+        item = NSMenuItem(title: "Add projects ...", action: #selector(addProject(_:)), keyEquivalent: "a")
         menu.addItem(item)
         
         menu.addItem(.separator())

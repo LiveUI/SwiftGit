@@ -21,13 +21,15 @@ class Projects {
         dialog.canChooseDirectories = true
         dialog.canChooseFiles = false
         dialog.canCreateDirectories = false
-        dialog.allowsMultipleSelection = false
+        dialog.allowsMultipleSelection = true
         if (dialog.runModal() == NSApplication.ModalResponse.OK) {
-            let name = dialog.url!.lastPathComponent
-            let spm = try! Project.new()
-            spm.name = name
-            spm.path = dialog.url!.path
-            try? spm.save()
+            for url in dialog.urls {
+                let name = url.lastPathComponent
+                let spm = try! Project.new()
+                spm.name = name
+                spm.path = url.path
+                try? spm.save()
+            }
         } else {
             return
         }
