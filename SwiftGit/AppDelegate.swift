@@ -95,20 +95,60 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Projects.remove(sender.project)
     }
     
+    let subsAsCatsKey = "SubsAsCats"
+    
     @objc func didTapStatusBarIcon() {
         let menu: NSMenu = NSMenu()
         
+        var item = NSMenuItem(title: "Configuration", action: nil, keyEquivalent: "")
+        let configuration = NSMenu()
+        
+        // Use subfolders as categories
+        let prefix: String
+        let subEnabled = UserDefaults.standard.bool(forKey: subsAsCatsKey)
+        if subEnabled {
+            prefix = "✔ "
+        } else {
+            prefix = ""
+        }
+        var config = NSMenuItem(title: prefix + "Use subfolders as categories", action: #selector(toggleSubfolders(_:)), keyEquivalent: "")
+        configuration.addItem(config)
+        
+        // Load all projects
         let projects = Project.all()
+        
+        // Remove all projects from the app
+        let selector: Selector?
+        if projects.count > 0 {
+            selector = #selector(removeAllProjects(_:))
+        } else {
+            selector = nil
+        }
+        config = NSMenuItem(title: "Remove all projects at once ...", action: selector, keyEquivalent: "")
+        configuration.addItem(config)
+        
+        // Go to github homepage
+        config = NSMenuItem(title: "Github.com homepage ...", action: #selector(goHome(_:)), keyEquivalent: "")
+        configuration.addItem(config)
+        
+        item.submenu = configuration
+        menu.addItem(item)
+        
+        menu.addItem(.separator())
+        
+        // Add projects
         if projects.count > 0 {
             menu.add(projects: projects)
             menu.addItem(.separator())
         }
         
-        var item = NSMenuItem(title: "Add project ...", action: #selector(addProject(_:)), keyEquivalent: "a")
+        // Add new project
+        item = NSMenuItem(title: "Add project ...", action: #selector(addProject(_:)), keyEquivalent: "a")
         menu.addItem(item)
         
         menu.addItem(.separator())
         
+        // Quit app
         item = NSMenuItem(title: "Quit", action: #selector(exit(_:)), keyEquivalent: "q")
         menu.addItem(item)
         
@@ -116,6 +156,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // MARK: Working with derived data
+    
+    @objc func removeAllProjects(_ sender: NSMenuItem) {
+        let alert = NSAlert()
+        alert.messageText = "Confirmation"
+        alert.informativeText = "Are you really sure? Like really, really sure?!"
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        
+        if alert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn {
+            Projects.removeAllProjects()
+        }
+    }
+    
+    @objc func toggleSubfolders(_ sender: NSMenuItem) {
+        let subEnabled = UserDefaults.standard.bool(forKey: subsAsCatsKey)
+        UserDefaults.standard.set(!subEnabled, forKey: subsAsCatsKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    @objc func goHome(_ sender: NSMenuItem) {
+        guard let url = URL(string: "https://github.com/LiveUI/SwiftGit") else { return }
+        NSWorkspace.shared.open(url)
+    }
     
     @objc func addProject(_ sender: NSMenuItem) {
         Projects.addProject()

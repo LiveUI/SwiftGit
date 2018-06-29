@@ -11,46 +11,51 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "32x32",
+      "idiom" : "mac",
+      "filename" : "git-32.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "32x32",
+      "idiom" : "mac",
+      "filename" : "git-64.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "git-128.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "128x128",
+      "idiom" : "mac",
+      "filename" : "git-257.png",
       "scale" : "2x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "round-remove-button_icon-icons.com_72582 copy.png",
+      "filename" : "git-256.png",
       "scale" : "1x"
     },
     {
       "size" : "256x256",
       "idiom" : "mac",
-      "filename" : "round-remove-button_icon-icons.com_72582-1.png",
+      "filename" : "git-513.png",
       "scale" : "2x"
     },
     {
       "size" : "512x512",
       "idiom" : "mac",
-      "filename" : "round-remove-button_icon-icons.com_72582.png",
+      "filename" : "git-512.png",
       "scale" : "1x"
     },
     {
-      "idiom" : "mac",
       "size" : "512x512",
+      "idiom" : "mac",
+      "filename" : "git-1024.png",
       "scale" : "2x"
     }
   ],

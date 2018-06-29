@@ -26,4 +26,10 @@ extension Project: Entity {
         return repo.value
     }
     
+    func stageAll() {
+        for change in repo?.status().value ?? [] {
+            _ = repo?.add(path: change.filePath)
+        }
+    }
+    
 }

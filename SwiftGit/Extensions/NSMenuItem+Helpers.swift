@@ -21,7 +21,7 @@ extension NSMenuItem {
     
     func makeBold() {
         let attributes = [
-            NSAttributedString.Key.font: NSFont.boldSystemFont(ofSize: 12)
+            NSAttributedString.Key.font: NSFont.boldSystemFont(ofSize: 14)
         ]
         let attributedString = NSAttributedString(string: title, attributes: attributes)
         attributedTitle = attributedString

@@ -33,6 +33,10 @@ class Projects {
         }
     }
     
+    static func removeAllProjects() {
+        Project.all().forEach({ try! $0.delete() })
+    }
+    
     static func remove(_ project: Project) {
         try! project.delete()
         try! CoreData.saveContext()

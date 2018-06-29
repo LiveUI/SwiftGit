@@ -12,6 +12,31 @@ import SwiftGit2
 
 extension SwiftGit2.Diff.Status {
     
+    var isStaged: Bool {
+        switch true {
+        case self.rawValue == Diff.Status.indexNew.rawValue:
+            return true
+        case self.rawValue == Diff.Status.indexDeleted.rawValue:
+            return true
+        case self.rawValue == Diff.Status.indexModified.rawValue:
+            return true
+        case self.rawValue == Diff.Status.workTreeNew.rawValue:
+            return false
+        case self.rawValue == Diff.Status.indexTypeChange.rawValue:
+            return true
+        case self.rawValue == Diff.Status.workTreeUnreadable.rawValue:
+            return false
+        case self.rawValue == Diff.Status.workTreeDeleted.rawValue:
+            return false
+        case self.rawValue == Diff.Status.workTreeModified.rawValue:
+            return false
+        case self.rawValue == Diff.Status.workTreeRenamed.rawValue:
+            return false
+        default:
+            return false
+        }
+    }
+    
     func toString() -> String {
         switch true {
         case self.rawValue == Diff.Status.indexNew.rawValue:

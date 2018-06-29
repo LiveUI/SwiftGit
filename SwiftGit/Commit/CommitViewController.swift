@@ -9,6 +9,7 @@
 import Foundation
 import Cocoa
 import Reloaded
+import SwiftGit2
 
 
 class CommitViewController: NSViewController, NSTextViewDelegate {
@@ -16,6 +17,10 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
     var project: Project!
     
     @IBOutlet var textView: NSTextView!
+    
+    @IBOutlet var tableView: NSTableView!
+    @IBOutlet var stagingColumn: NSTableColumn!
+    @IBOutlet var fileColumn: NSTableColumn!
     
     var commit: ((String) -> Void)?
     var cancel: (() -> Void)?
@@ -25,6 +30,17 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
         super.viewWillAppear()
         
         textView.string = project.lastCommitMessage ?? ""
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        
+        // TODO: Restore the view size on new load!!
+        UserDefaults.standard.set(NSStringFromRect(view.bounds), forKey: "ViewBounds")
+        UserDefaults.standard.synchronize()
     }
     
     override func viewDidDisappear() {
@@ -40,6 +56,10 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
     
     @IBAction func stageMissing(_ sender: NSButton) {
         stageAll?()
+        
+        project.stageAll()
+        
+        tableView.reloadData()
     }
     
     @IBAction func cancelCommit(_ sender: NSButton) {
@@ -54,6 +74,31 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
         try! project.save()
         
         commit?(textView.string)
+    }
+    
+}
+
+
+extension CommitViewController: NSTableViewDelegate, NSTableViewDataSource {
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return project.repo?.status().value?.count ?? 0
+    }
+    
+    func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: NSTableView, willDisplayCell cell: Any, for tableColumn: NSTableColumn?, row: Int) {
+        guard let statuses = project.repo?.status().value else {
+            return
+        }
+        let status = statuses[row]
+        if let cell = cell as? NSButtonCell {
+            cell.state = status.status.isStaged ? .on : .off
+        } else if let cell = cell as? NSTextFieldCell {
+            cell.stringValue = status.title
+        }
     }
     
 }
