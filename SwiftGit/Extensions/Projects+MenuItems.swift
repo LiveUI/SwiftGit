@@ -14,7 +14,26 @@ extension Array where Element: Project {
     
     func asMenuItems() -> [NSMenuItem] {
         var items: [NSMenuItem] = []
-        for project in self {
+        let subEnabled = UserDefaults.standard.bool(forKey: "SubsAsCats")
+        let arr = self.sorted(by: { (e1, e2) -> Bool in
+            return (e1.path ?? "") > (e2.path ?? "")
+        })
+        var lastCategory: String? = nil
+        for project in arr {
+            if subEnabled, let path = project.path {
+                var url = URL(fileURLWithPath: path)
+                url.deleteLastPathComponent()
+                let cat = url.lastPathComponent
+                if cat != lastCategory {
+                    items.append(.separator())
+                    
+                    let item = NSMenuItem(title: cat, action: nil, keyEquivalent: "")
+                    items.append(item)
+                    
+                    lastCategory = cat
+                }
+            }
+            
             // Sort out submenu
             let removeProjectTitle: String
             let submenu = NSMenu()
