@@ -23,9 +23,9 @@ extension Array where Element: Project {
             if let repo = repo {
                 action = nil
                 submenu = NSMenu()
-                if let status = repo.status().value {
-                    print(status)
-                    hasChanges = status.count > 0
+                if let statuses = repo.status().value {
+                    //print(status)
+                    hasChanges = statuses.count > 0
                     
                     if hasChanges {
                         var item = NSMenuItem(title: "Commit all changes ...", action: nil, keyEquivalent: "")
@@ -34,13 +34,37 @@ extension Array where Element: Project {
                         submenu?.addItem(item)
                         
                         item = NSMenuItem(title: "Changes", action: nil, keyEquivalent: "")
-                        item.target = NSApplication.shared.delegate
-                        item.representedObject = project
+                        
+                        let changes = NSMenu()
+                        
+//                        let allFiles = FileManager.default.contents(atPath: project.path!)
+                        
+                        for change in statuses {
+                            print(change)
+                            let path = change.headToIndex?.newFile?.path ??
+                                change.headToIndex?.oldFile?.path ??
+                                change.indexToWorkDir?.newFile?.path ??
+                                change.indexToWorkDir?.oldFile?.path ?? "Unknown path"
+                            let info = FileInfo.init(project: project, path: path)
+                            let title = change.status.toString() + " " + path
+                            let changeItem = NSMenuItem(title: title, action: #selector(AppDelegate.revealInFinder(_:)), keyEquivalent: "")
+                            changeItem.target = NSApplication.shared.delegate
+                            changeItem.representedObject = info
+                            changes.addItem(changeItem)
+                        }
+                        
+                        
+                        item.submenu = changes
+                        
                         submenu?.addItem(item)
                         
                         submenu?.addItem(.separator())
                     }
                 }
+                
+                
+                
+                submenu?.addItem(.separator())
                 
                 var item = NSMenuItem(title: "Fetch", action: #selector(AppDelegate.fetch(_:)), keyEquivalent: "")
                 item.target = NSApplication.shared.delegate

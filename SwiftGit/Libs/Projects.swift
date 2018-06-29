@@ -8,6 +8,7 @@
 
 import Foundation
 import Cocoa
+import Reloaded
 
 
 class Projects {
@@ -32,8 +33,9 @@ class Projects {
         }
     }
     
-    @objc func aaaa() {
-        
+    static func remove(_ project: Project) {
+        try! project.delete()
+        try! CoreData.saveContext()
     }
     
 }

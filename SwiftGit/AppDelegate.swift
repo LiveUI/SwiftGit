@@ -46,27 +46,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func push(_ sender: NSMenuItem) {
-        guard let repo = sender.project.repo else {
-            return
-        }
-        for remote in repo.allRemotes().value ?? [] {
-            
-        }
+//        guard let repo = sender.project.repo else {
+//            return
+//        }
+//        for remote in repo.allRemotes().value ?? [] {
+//
+//        }
     }
     
     @objc func pull(_ sender: NSMenuItem) {
-        guard let repo = sender.project.repo else {
+//        guard let repo = sender.project.repo else {
+//            return
+//        }
+//
+//        fetch(sender)
+//        // TODO: Checkout latest commit
+    }
+    
+    @objc func revealInFinder(_ sender: NSMenuItem) {
+        guard let info = sender.representedObject as? FileInfo else {
             return
         }
-        
-        fetch(sender)
-        
-        
+        NSWorkspace.shared.selectFile(info.fullPath, inFileViewerRootedAtPath: info.fullPath)
     }
     
     @objc func removeProject(_ sender: NSMenuItem) {
-        try! sender.project.delete()
-        try! CoreData.saveContext()
+        Projects.remove(sender.project)
     }
     
     @objc func didTapStatusBarIcon() {
