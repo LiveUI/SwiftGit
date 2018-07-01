@@ -24,6 +24,8 @@ To build SwiftGit2 (one of the SwiftGit dependencies), you'll need the following
 * automake
 * pkg-config
 
+you can install these using `brew install cmake libssh2 libtool autoconf automake pkg-config`
+
 
 ## Potential issues
 If you have `SwiftLint` installed you might have an issue compiling carthage thanks to `SwiftShell` not passing it's validation. You can remove SwiftLint temporarily using `brew uninstall swiftlint` and later adding it again. We should send a PR to the [kareman/SwiftShell](https://github.com/kareman/SwiftShell) unless one of you beats us to it!
