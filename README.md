@@ -1,5 +1,13 @@
 # SwiftGit
 
+<table>
+	<tr>
+		<td><img src="https://github.com/LiveUI/SwiftGit/blob/master/Other/screenshot1.png?raw=true" alt="" /></td>
+		<td><img src="https://github.com/LiveUI/SwiftGit/blob/master/Other/screenshot2.png?raw=true" alt="" /></td>
+		<td><img src="https://github.com/LiveUI/SwiftGit/blob/master/Other/screenshot3.png?raw=true" alt="" /></td>
+	</tr>
+</table>
+
 ## Use
 * Run `carthage update --platform osx --cache-builds` to install dependencies, run the app
 

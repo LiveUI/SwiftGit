@@ -12,7 +12,7 @@ import Reloaded
 import SwiftGit2
 
 
-class CommitViewController: NSViewController, NSTextViewDelegate {
+class CommitViewController: NSViewController, NSTextViewDelegate, NSTextFieldDelegate {
     
     var project: Project!
     
@@ -25,6 +25,8 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
     var commit: ((String) -> Void)?
     var cancel: (() -> Void)?
     var stageAll: (() -> Void)?
+    
+    // MARK: View lifecycle
     
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -49,10 +51,14 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
         NSApplication.shared.stopModal()
     }
     
+    // MARK: Delegate methods
+    
     func textDidChange(_ notification: Notification) {
         project.lastCommitMessage = (notification.object as? NSTextView)?.string
         try! project.save()
     }
+    
+    // MARK: Actions
     
     @IBAction func stageMissing(_ sender: NSButton) {
         stageAll?()
@@ -70,6 +76,12 @@ class CommitViewController: NSViewController, NSTextViewDelegate {
     }
     
     @IBAction func makeCommit(_ sender: NSButton) {
+        guard !textView.string.isEmpty else {
+            
+            return
+        }
+        sender.isEnabled = false
+        
         project.lastCommitMessage = ""
         try! project.save()
         
@@ -96,6 +108,7 @@ extension CommitViewController: NSTableViewDelegate, NSTableViewDataSource {
         let status = statuses[row]
         if let cell = cell as? NSButtonCell {
             cell.state = status.status.isStaged ? .on : .off
+            cell.isEnabled = false
         } else if let cell = cell as? NSTextFieldCell {
             cell.stringValue = status.title
         }

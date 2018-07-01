@@ -98,6 +98,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc func commit(_ sender: NSMenuItem) {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let windowController = storyboard.instantiateController(withIdentifier: "Commit Window Controller") as! NSWindowController
+        guard let path = sender.project.path else { return }
+        var context = CustomContext()
+        context.currentdirectory = path
         if let commitWindow = windowController.window {
             let controller = commitWindow.contentViewController as! CommitViewController
             controller.project = sender.project
@@ -105,13 +108,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 windowController.close()
             }
             controller.stageAll = {
-                guard let path = sender.project.path else { return }
-                var context = CustomContext()
-                context.currentdirectory = path
                 try? context.runAndPrint("git", "add", ".", "-A")
             }
             controller.commit = { commitMessage in
-                sender.project.repo?.commit(message: commitMessage, signature: Signature(name: "", email: <#T##String#>))
+                try? context.runAndPrint("git", "commit", "-m", commitMessage)
             }
             
             NSApplication.shared.runModal(for: commitWindow)

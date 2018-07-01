@@ -151,6 +151,7 @@
                         <constraints>
                             <constraint firstItem="1jw-vR-zhQ" firstAttribute="leading" secondItem="wmF-MI-4cx" secondAttribute="trailing" constant="8" id="6mh-F6-Ckk"/>
                             <constraint firstItem="5S1-3e-rr4" firstAttribute="top" secondItem="Fho-b9-dLP" secondAttribute="top" constant="13" id="8Bv-9i-r2M"/>
+                            <constraint firstItem="wsE-wg-062" firstAttribute="top" secondItem="1jw-vR-zhQ" secondAttribute="bottom" constant="8" id="J5k-wo-uwm"/>
                             <constraint firstItem="mjK-Ba-m8L" firstAttribute="leading" secondItem="Fho-b9-dLP" secondAttribute="leading" constant="8" id="QLH-9y-Ltx"/>
                             <constraint firstAttribute="bottom" secondItem="wsE-wg-062" secondAttribute="bottom" constant="10" id="Scn-4P-lNP"/>
                             <constraint firstAttribute="trailing" secondItem="wsE-wg-062" secondAttribute="trailing" constant="8" id="TCX-FG-iYE"/>
@@ -161,7 +162,6 @@
                             <constraint firstItem="1jw-vR-zhQ" firstAttribute="top" secondItem="5S1-3e-rr4" secondAttribute="bottom" constant="8" id="jgb-JG-rr4"/>
                             <constraint firstItem="wmF-MI-4cx" firstAttribute="leading" secondItem="Fho-b9-dLP" secondAttribute="leading" constant="8" id="kLR-mp-qPk"/>
                             <constraint firstAttribute="trailing" secondItem="1jw-vR-zhQ" secondAttribute="trailing" constant="8" id="ymd-G5-i6F"/>
-                            <constraint firstItem="wsE-wg-062" firstAttribute="top" secondItem="1jw-vR-zhQ" secondAttribute="bottom" constant="8" id="z7k-wP-v5V"/>
                         </constraints>
                     </view>
                     <connections>
