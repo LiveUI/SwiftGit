@@ -11,10 +11,13 @@
 ## Use
 * Run `carthage update --platform osx --cache-builds` to install dependencies, run the app
 
-If you don't have Carthage, do `brew install carthage`
+#### If you don't have Carthage
+`brew install carthage`
 
-If you don't have brew, do `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+#### If you don't have brew
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
+#### If you don't have Ruby
 You should have Ruby ... really! ❤️
 
 ## Publishing on the AppStore
