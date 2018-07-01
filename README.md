@@ -9,7 +9,9 @@
 </table>
 
 ## Use
-* Run `carthage update --platform osx --cache-builds` to install dependencies, run the app
+* `git clone git@github.com:LiveUI/SwiftGit.git`
+* `carthage update --platform osx --cache-builds` to install dependencies
+* Run the mac app target from Xcode
 
 #### If you don't have Carthage
 `brew install carthage`
