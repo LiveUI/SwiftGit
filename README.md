@@ -10,7 +10,7 @@
 
 ## Installation
 
-> Every release has an app attached to it!
+> Every release has an app attached to it! https://github.com/LiveUI/SwiftGit/releases
 
 To compile from source:
 * `git clone git@github.com:LiveUI/SwiftGit.git`
