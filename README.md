@@ -8,7 +8,11 @@
 	</tr>
 </table>
 
-## Use
+## Installation
+
+Every release has an app attached to it
+
+If you'd like to compile then:
 * `git clone git@github.com:LiveUI/SwiftGit.git`
 * `carthage update --platform osx --cache-builds` to install dependencies
 * Run the mac app target from Xcode
