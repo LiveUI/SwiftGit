@@ -10,9 +10,9 @@
 
 ## Installation
 
-Every release has an app attached to it
+> Every release has an app attached to it!
 
-If you'd like to compile then:
+To compile from source:
 * `git clone git@github.com:LiveUI/SwiftGit.git`
 * `carthage update --platform osx --cache-builds` to install dependencies
 * Run the mac app target from Xcode
